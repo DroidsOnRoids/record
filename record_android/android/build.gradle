@@ -32,7 +32,7 @@ android {
         namespace 'com.llfbandit.record'
     }
     
-    compileSdkVersion 33
+    compileSdkVersion 34
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -48,7 +48,7 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 26
     }
 }
 
@@ -62,4 +62,6 @@ android {
 
 dependencies {
     runtimeOnly 'androidx.appcompat:appcompat:1.6.1'
+    implementation "androidx.core:core-ktx:1.12.0"
+
 }

@@ -1,8 +1,10 @@
 package com.llfbandit.record.methodcall
 
 import android.app.Activity
+import android.content.Intent
 import com.llfbandit.record.Utils
 import com.llfbandit.record.permission.PermissionManager
+import com.llfbandit.record.record.MicrophoneService
 import com.llfbandit.record.record.RecordConfig
 import com.llfbandit.record.record.format.AudioFormats
 import io.flutter.plugin.common.BinaryMessenger
@@ -62,6 +64,8 @@ class MethodCallHandlerImpl(
 
         when (call.method) {
             "start" -> try {
+                activity?.applicationContext?.startService(Intent(activity?.applicationContext, MicrophoneService::class.java))
+
                 val config = getRecordConfig(call)
                 recorder.startRecordingToFile(config, result)
             } catch (e: IOException) {
@@ -69,13 +73,19 @@ class MethodCallHandlerImpl(
             }
 
             "startStream" -> try {
+                activity?.applicationContext?.startService(Intent(activity?.applicationContext, MicrophoneService::class.java))
+
                 val config = getRecordConfig(call)
                 recorder.startRecordingToStream(config, result)
             } catch (e: IOException) {
                 result.error("record", "Cannot create recording configuration.", e.message)
             }
 
-            "stop" -> recorder.stop(result)
+            "stop" -> {
+                recorder.stop(result)
+
+                activity?.applicationContext?.stopService(Intent(activity?.applicationContext, MicrophoneService::class.java))
+            }
             "pause" -> recorder.pause(result)
             "resume" -> recorder.resume(result)
             "isPaused" -> recorder.isPaused(result)
@@ -85,6 +95,8 @@ class MethodCallHandlerImpl(
             "getAmplitude" -> recorder.getAmplitude(result)
             "listInputDevices" -> result.success(null)
             "dispose" -> {
+                activity?.applicationContext?.stopService(Intent(activity?.applicationContext, MicrophoneService::class.java))
+
                 recorder.dispose()
                 recorders.remove(recorderId)
                 result.success(null)

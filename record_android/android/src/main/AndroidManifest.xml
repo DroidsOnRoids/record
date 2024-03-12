@@ -2,4 +2,14 @@
   package="com.llfbandit.record">
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE"/>
+
+    <application>
+        <service
+        android:name=".record.MicrophoneService"
+        android:foregroundServiceType="microphone"
+        android:exported="false">
+        </service>
+    </application>
 </manifest>
