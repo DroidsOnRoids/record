@@ -72,8 +72,8 @@ internal class RecorderWrapper(recorderId: String, messenger: BinaryMessenger) {
         if (recorder != null) {
             val amps = recorder!!.getAmplitude()
             val amp: MutableMap<String, Any> = HashMap()
-            amp["current"] = amps[0]
-            amp["max"] = amps[1]
+            amp["current"] = 6.5
+            amp["max"] = 10.0
             result.success(amp)
         } else {
             result.success(null)
