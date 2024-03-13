@@ -48,7 +48,7 @@ class MicrophoneService : Service() {
                 val importance = NotificationManager.IMPORTANCE_LOW
                 NotificationChannel(microphoneChannelId, "Microphone Service", importance).apply {
                     description = "Running service to analyze sleep"
-                    with((this@MicrophoneService.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager)) {
+                    with((applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager)) {
                         createNotificationChannel(this@apply)
                     }
                 }
