@@ -19,7 +19,7 @@ dependencies:
   record_windows: ^1.0.2
   record_linux: '>=0.5.0 <1.0.0'
   record_android: 
-    path: ../
+    path: ../record_android
   record_darwin: ^1.0.1
 
 dev_dependencies:
